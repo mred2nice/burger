@@ -1,0 +1,52 @@
+<div class="body">
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <img src="/assets/img/Hamburger.png" alt="burger" class="center-block img-responsive"/>
+      <h1> Eat-Da-Burger! </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 text-right">
+        {{#each burgers}}
+          {{#unless this.devoured}}
+              <div class="row">
+                <div class="col-sm-9 text-right">
+                  {{this.burger_name}}
+                </div>
+                <div class="col-sm-3 text-left">
+                  <form action="/{{this.id}}?_method=PUT" method="POST">
+                    <input type="hidden" name="devoured" value="true">
+                    <button type="submit">Devour It!</button>
+                  </form>
+                </div>
+              </div>
+          {{/unless}}
+        {{/each}}
+    </div>
+
+    <div class="col-sm-6 text-left">
+        {{#each burgers}}
+          {{#if this.devoured}}
+              {{this.burger_name}}
+              <form action="/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="devoured" value="false">
+              </form>
+          {{/if}}
+        {{/each}}
+    </div>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <form class="create-update-form" action="/" method="POST">
+        <div class="form-group">
+          <input type="text" id="ca" name="burger_name">
+        </div>
+        <button type="submit" class="button">Submit</button>
+        <h5>Enter a burger you would like to eat and click the Submit button!</h5>
+      </form>
+    </div>
+  </div>
+
+</div>
